@@ -1,0 +1,149 @@
+html, body {
+	font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+}
+
+a, a:visited, a:hover, a:active {
+	color: #2980B9;
+}
+
+#popupbody {
+	min-width: 120px;
+}
+
+#status {
+	white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 400px;
+}
+
+#gotable {
+	margin-top: 30px;
+	border-top: 1px dotted #ccc;
+}
+
+#entires {
+	margin-bottom: 10px;
+}
+
+#backdiv {
+	margin-bottom: 20px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.entry input {
+	width: 100%;
+	font-size: 15px;
+	font-weight: 400;
+	color: #2980B9;
+	border: none;
+	border-bottom: 1px solid #eee;
+	outline: none;
+}
+
+.entry input:focus {
+	border-bottom: 1px solid #2980B9;
+}
+
+.entry  input.warning {
+	border-bottom:1px solid #D44800;
+}
+
+.entry  input.error {
+	border-bottom: 1px solid #ff0000;
+}
+
+.label {
+	font-size: 11px;
+	color: #333;
+	margin-bottom: 8px;
+}
+
+.image {
+	margin-top: 8px;
+}
+	  
+.btnStyle {
+	padding: 3px;
+    margin-top: 5px;
+	min-width: 80px;
+    color: #fff;
+    background: #2980B9;
+    border: none;
+}
+.btnStyle:hover {
+	background: #346392;
+}
+.btnStyle:active {
+	background: #27496d;
+}
+
+.extraMargins {
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 35px;
+}
+
+.btnOptions {
+	padding: 3px 10px;
+    margin-top: 5px;
+	min-width: 80px;
+    color: #fff;
+    background: #2980B9;
+    border: none;
+	text-shadow: none;
+}
+
+.nextRow {
+	margin-top:20px;
+}
+
+.optionsRow input {
+	font-size: 13px;
+	font-weight: 400;
+	color: #2980B9;
+	border: none;
+	border-bottom: 1px solid #eee;
+	outline: none;
+	background-color: none;
+}
+
+.optionsRow input:focus {
+	border-bottom: 1px solid #2980B9;
+}
+
+.optionsRow  input.warning {
+	border-bottom: 1px solid #D44800;
+}
+
+.optionsRow  input.error {
+	border-bottom: 1px solid #ff0000;
+}
+
+.deleteButton {
+	padding: 2px 0px;
+}
+
+.noInputBorder input {
+	border: none;
+}
+
+.noInputBorder input:focus {
+	border: none;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../assets/check_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked + label span {
+    background:url(../assets/check_sheet.png) -19px top no-repeat;
+}

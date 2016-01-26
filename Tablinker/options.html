@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tablinker Options</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	</head>
+
+	<body class="inputTextStyle">
+		<div id="helpDiv" style="display:none;">
+			<div id="backdiv" class="noInputBorder">
+				<input id="btn_back" type="image" src="assets/back.png" alt="Back" width="26" height="26"/>
+			</div>
+			<h4 id="help_title"></h4>
+			<span id="help_title_explanation"></span><br><br>
+			<h4 id="help_url"></h4>
+			<span id="help_url_explanation"></span><br>
+			<li id="help_url_explanation_1"></li>
+			<li id="help_url_explanation_2"></li><br><br>
+			
+			<span id="help_github_footer"></span><a href="https://github.com/wojciechplesiak/tablinker-chrome-extension" id="help_github_line"></a>
+		</div>
+		<div id="mainDiv">
+			<p><b id="options_description"></b></p>
+		
+			<div class="optionsRow">
+				<input type="text" id="title" style="margin-bottom:4px;"></input>
+				<div style="float:right;">
+					<div class="noInputBorder">
+						<input id="btn_help" type="image" src="assets/help.png" alt="Help" width="16" height="16"/>
+					</div>
+				</div>
+				<input type="text" id="url" style="min-width:100%;" autofocus></input>
+			</div>
+			<div id="container"></div>
+			<br>
+			<div>
+				<center>
+					<div class="noInputBorder">
+						<input id="btn_more" type="image" src="assets/add.png" alt="Add" width="50" height="30"/>
+					</div>
+				</center>
+			</div>
+			
+			<table>
+			<tr>
+				<td>
+					<input type="checkbox" id="multientry_cb" name="multientry_cb" checked="checked"/>
+					<label for="multientry_cb" ><span></span><label id="multientry_checkbox"></label></label>
+				</td>
+			</tr>
+			</table>
+			
+			<table id="gotable">
+			<tr>
+				<td style="min-width:150px;">
+					<button id="btn_restore" class="btnOptions"></button>
+				</td>
+				<td style="width:100%" align="right">
+					<button id="btn_save" class="btnOptions"></button>
+				</td>
+			</tr>
+			<table>
+		</div>
+		
+		<script src="js/options.js"></script>
+	</body>
+</html>

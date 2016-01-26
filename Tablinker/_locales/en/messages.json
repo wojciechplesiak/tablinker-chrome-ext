@@ -1,0 +1,59 @@
+{
+	"extension_description": {
+		"message" : "This extension allows to quickly open links in a new tab"
+	},
+	"options_description": {
+		"message" : "Provide titles and base urls for your shortcuts"
+	},
+	"btn_save": {
+		"message" : "Save and close"
+	},
+	"btn_restore": {
+		"message" : "Restore defaults"
+	},
+	"btn_configure": {
+		"message" : "Configure"
+	},
+	"btn_go": {
+		"message" : "Go"
+	},
+	"not_configured_title": {
+		"message" : "Tablinker not configured"
+	},
+	"not_configured_description": {
+		"message" : "Press below button to go to options and set up base urls."
+	},
+	"title_placeholder": {
+		"message" : "Title (description)"
+	},
+	"base_url_placeholder": {
+		"message" : "eg. http://website.com/?id=   or   http://website.com/%/bla"
+	},
+	"help_title": {
+		"message" : "Title"
+	},
+	"help_title_explanation": {
+		"message" : "Title text to be displayed in popup as a label for text input field."
+	},
+	"help_url": {
+		"message" : "Base url"
+	},
+	"help_url_explanation": {
+		"message" : "An url to be modified/appended and opened in a new tab. In can be defined in a following ways:"
+	},
+	"help_url_explanation_1": {
+		"message" : "no placeholder - your input will be appended at the end of the url"
+	},
+	"help_url_explanation_2": {
+		"message" : "with placeholder - placeholder ' % ' will be replaced with your input"
+	},
+	"help_github_footer": {
+		"message" : "See detailed tutorial on a "
+	},
+	"help_github_line": {
+		"message" : "github page"
+	},
+	"multientry_checkbox": {
+		"message" : " Allow entering multiple space-separated values to open multiple tabs using the same base url."
+	}
+}

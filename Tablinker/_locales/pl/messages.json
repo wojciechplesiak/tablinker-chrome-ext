@@ -1,0 +1,59 @@
+{
+	"extension_description": {
+		"message" : "Dodatek pozwalający na szybkie otwieranie linków w nowej karcie"
+	},
+	"options_description": {
+		"message" : "Podaj opisy i bazowe linki dla swoich skrótów"
+	},
+	"btn_save": {
+		"message" : "Zapisz i zamknij"
+	},
+	"btn_restore": {
+		"message" : "Przywróć domyślne"
+	},
+	"btn_configure": {
+		"message" : "Konfiguruj"
+	},
+	"btn_go": {
+		"message" : "Gotowe"
+	},
+	"not_configured_title": {
+		"message" : "Tablinker - brak ustawień"
+	},
+	"not_configured_description": {
+		"message" : "Skonfiguruj opisy oraz bazowe linki w celu utworzenia swoich skrótów."
+	},
+	"title_placeholder": {
+		"message" : "Tytuł (opis)"
+	},
+	"base_url_placeholder": {
+		"message" : "np.: http://website.com/?id=   lub   http://website.com/%/bla"
+	},
+	"help_title": {
+		"message" : "Tytuł (opis)"
+	},
+	"help_title_explanation": {
+		"message" : "Tytuł, który będzie wyświetlony jako opis pola tekstowego."
+	},
+	"help_url": {
+		"message" : "Bazowy url"
+	},
+	"help_url_explanation": {
+		"message" : "Adres url, który po dodaniu/podmianie parametru zostanie otworzony w nowej karcie. Może być skonstruowanny na dwa sposoby:"
+	},
+	"help_url_explanation_1": {
+		"message" : "bez parametru - podany tekst zostanie doklejony na końcu bazowego url'a"
+	},
+	"help_url_explanation_2": {
+		"message" : "z parametrem - znak specjalny ' % ' podany w bazowym url'u zostanie zamieniony na podany tekst"
+	},
+	"help_github_footer": {
+		"message" : "Zobacz szczegółowy tutorial na "
+	},
+	"help_github_line": {
+		"message" : "stronie github'a"
+	},
+	"multientry_checkbox": {
+		"message" : " Pozwalaj na podanie kilku tekstów oddzielonych spacją, w celu otworzenia kilku stron używając tego samego adresu bazowego."
+	}
+}
