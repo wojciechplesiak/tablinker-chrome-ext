@@ -1,9 +1,9 @@
-# Tablinker Chrome Extension
+# Urly Chrome Extension
 A Google Chrome Extension used to easily open links with page indicators/ticket number in a new tab.
 
 # Configuration
 1. Install this Extension from Chrome WebStore
-2. Configure it by adding base URL and a hint
+2. Configure it by adding base URL and a label
 3. Type what needs to be replaced in base URL or added at the end and press Enter (or "Go")
 4. New tab will be opened on that link
 

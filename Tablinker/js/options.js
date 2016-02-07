@@ -1,13 +1,10 @@
 /**
-  * Tablinker Chrome Extension
+  * Urly WebExtension
   * Options JS
   * @date 14/01/2016
   * @author Wojciech Plesiak 
-  * @email plesiak.wojciech+tablinker@gmail.com
+  * @email plesiak.wojciech+urly@gmail.com
   */
-
-var MIN_EXTRA_LINES     = 0;
-var STATUS_DURATION     = 2000;
 
 var ID_OPTIONS_DESC     = 'options_description';
 var ID_BTN_SAVE    	    = 'btn_save';
@@ -36,7 +33,6 @@ var ELEMENT_DELETE_BTN  = 'delete';
 var ELEMENT_DIV         = 'div';
 var ELEMENT_CHECKBOX	= 'multientry_cb';
 
-var EMPTY               = ''
 var HASH				= '#'
 var TITLE_PLACEHOLDER   = 'title_placeholder'
 var BASEURL_PLACEHOLDER = 'base_url_placeholder'
@@ -45,8 +41,10 @@ var CSS_CLASS_WARNING	= 'warning';
 var CSS_CLASS_ERROR		= 'error';
 
 var PLACEHOLDER         = '%d';
+var PLACEHOLDER_TITLE   = '%t';
+var PLACEHOLDER_URL     = '%u';
 
-var NEXT_LINE_HTML = '<div id="div%d" class="optionsRow nextRow"><input type="text" id="title%d" placeholder="' + getTitlePlaceholder() + '"></input><div style="float:right; margin-top:5px;"><div class="noInputBorder"><input id="%d" type="image" src="assets/clear.png" alt="Remove" width="14" height="14" class="deleteButton"/></div></div><input type="text" id="url%d" placeholder="' + getBaseUrlPlaceholder() + '" style="min-width:100%;" autofocus><br></div>';
+var NEXT_LINE_HTML = '<div id="div%d" class="optionsRow nextRow"><input type="text" id="title%d" placeholder="' + PLACEHOLDER_TITLE + '"></input><div style="float:right; margin-top:5px;"><div class="noInputBorder"><input id="%d" type="image" src="assets/clear.png" alt="Remove" width="14" height="14" class="deleteButton"/></div></div><input type="text" id="url%d" placeholder="' + PLACEHOLDER_URL + '" style="min-width:100%;" autofocus><br></div>';
 
 var validate			= false;
 
@@ -56,43 +54,40 @@ var validate			= false;
   */
 function on_load() {
 	localize_page();
-	chrome.storage.sync.get({
-		_title: EMPTY,
-		_url: EMPTY,
-		_extraLines: MIN_EXTRA_LINES,
-		_titles: [],
-		_urls: [],
-		_multientry: true
-	}, function(_items) {
-		on_restore(_items);
-	});
+	prepare_next_line_html();
+	browser_getSettings(on_restore);
 }
 
 function localize_page() {
-	document.getElementById(ID_OPTIONS_DESC).textContent = chrome.i18n.getMessage(ID_OPTIONS_DESC);
-	document.getElementById(ID_BTN_SAVE).textContent = chrome.i18n.getMessage(ID_BTN_SAVE);
-	document.getElementById(ID_BTN_RESTORE).textContent = chrome.i18n.getMessage(ID_BTN_RESTORE);
-	document.getElementById(ID_MULTIENTRY_CB).textContent = chrome.i18n.getMessage(ID_MULTIENTRY_CB);
+	document.getElementById(ID_OPTIONS_DESC).textContent = browser_getMessage(ID_OPTIONS_DESC);
+	document.getElementById(ID_BTN_SAVE).textContent = browser_getMessage(ID_BTN_SAVE);
+	document.getElementById(ID_BTN_RESTORE).textContent = browser_getMessage(ID_BTN_RESTORE);
+	document.getElementById(ID_MULTIENTRY_CB).textContent = browser_getMessage(ID_MULTIENTRY_CB);
 	document.getElementById(ELEMENT_TITLE).placeholder = getTitlePlaceholder();
 	document.getElementById(ELEMENT_URL).placeholder = getBaseUrlPlaceholder();
 	
 	// help page
-	document.getElementById(ID_HELP_TITLE).textContent = chrome.i18n.getMessage(ID_HELP_TITLE);
-	document.getElementById(ID_HELP_TITLE_EXP).textContent = chrome.i18n.getMessage(ID_HELP_TITLE_EXP);
-	document.getElementById(ID_HELP_URL).textContent = chrome.i18n.getMessage(ID_HELP_URL);
-	document.getElementById(ID_HELP_URL_EXP).textContent = chrome.i18n.getMessage(ID_HELP_URL_EXP);
-	document.getElementById(ID_HELP_URL_EXP_1).textContent = chrome.i18n.getMessage(ID_HELP_URL_EXP_1);
-	document.getElementById(ID_HELP_URL_EXP_2).textContent = chrome.i18n.getMessage(ID_HELP_URL_EXP_2);
-	document.getElementById(ID_HELP_FOOTER).textContent = chrome.i18n.getMessage(ID_HELP_FOOTER);
-	document.getElementById(ID_HELP_GITHUB).textContent = chrome.i18n.getMessage(ID_HELP_GITHUB);
+	document.getElementById(ID_HELP_TITLE).textContent = browser_getMessage(ID_HELP_TITLE);
+	document.getElementById(ID_HELP_TITLE_EXP).textContent = browser_getMessage(ID_HELP_TITLE_EXP);
+	document.getElementById(ID_HELP_URL).textContent = browser_getMessage(ID_HELP_URL);
+	document.getElementById(ID_HELP_URL_EXP).textContent = browser_getMessage(ID_HELP_URL_EXP);
+	document.getElementById(ID_HELP_URL_EXP_1).textContent = browser_getMessage(ID_HELP_URL_EXP_1);
+	document.getElementById(ID_HELP_URL_EXP_2).textContent = browser_getMessage(ID_HELP_URL_EXP_2);
+	document.getElementById(ID_HELP_FOOTER).textContent = browser_getMessage(ID_HELP_FOOTER);
+	document.getElementById(ID_HELP_GITHUB).textContent = browser_getMessage(ID_HELP_GITHUB);
+}
+
+function prepare_next_line_html() {
+	NEXT_LINE_HTML = NEXT_LINE_HTML.replace(new RegExp(PLACEHOLDER_TITLE, 'g'), getTitlePlaceholder());
+	NEXT_LINE_HTML = NEXT_LINE_HTML.replace(new RegExp(PLACEHOLDER_URL, 'g'), getBaseUrlPlaceholder());
 }
 
 function getTitlePlaceholder() {
-	return chrome.i18n.getMessage(TITLE_PLACEHOLDER);
+	return browser_getMessage(TITLE_PLACEHOLDER);
 }
 
 function getBaseUrlPlaceholder() {
-	return chrome.i18n.getMessage(BASEURL_PLACEHOLDER);
+	return browser_getMessage(BASEURL_PLACEHOLDER);
 }
 
 function on_restore(_items) {
@@ -162,14 +157,11 @@ function set_delete_buttons_click_events(limit) {
   * Saves options to chrome.storage.sync.
   */
 function on_save() {
-	chrome.storage.sync.get({
-		_extraLines: MIN_EXTRA_LINES,
-		_titles: [],
-		_urls: []
-	}, function(_items) {
+	var callback = function(_items) {
 		validate = true;
 		on_save_input(_items, true, false);
-	});
+	}
+	browser_getSettings(callback);
 }
 
 /**
@@ -198,21 +190,14 @@ function on_save_input(_items, readInput, reload) {
 		}
 	}
 	
-	chrome.storage.sync.set({
-		_title: title,
-		_url: url,
-		_extraLines: _items._extraLines,
-		_titles: titles,
-		_urls: urls,
-		_multientry: multientry
-	}, function() {
-		
+	var callback = function() {
 		if (areUrlsValid(url, urls) && !reload) {
 			on_close();
 		} else {
 			on_load();
 		}
-	});
+	}
+	browser_saveSettings(callback, title, url, titles, urls, multientry, _items._extraLines);
 }
 
 function areUrlsValid(url, urls) {
@@ -258,15 +243,9 @@ function getUrl(i) {
 function on_restore_defaults() {
 	reset_elements();
 	validate = false;
-
-	chrome.storage.sync.set({
-			_title: EMPTY,
-			_url: EMPTY,
-			_extraLines: MIN_EXTRA_LINES,
-			_titles: [],
-			_urls: [],
-			_multientry : true
-	});
+	
+	var callback = function() {};
+	browser_saveSettings(callback, EMPTY, EMPTY, [], [], true, MIN_EXTRA_LINES);
 }
 
 function reset_elements() {
@@ -294,14 +273,7 @@ function remove_dom_element(id) {
 }
 
 function delete_stored_data_and_reload(index) {
-	chrome.storage.sync.get({
-		_title: EMPTY,
-		_url: EMPTY,
-		_extraLines: MIN_EXTRA_LINES,
-		_titles: [],
-		_urls: []
-	}, function(_items) {
-
+	var callback = function(_items) {
 		if (_items._extraLines > MIN_EXTRA_LINES) {
 			// save input before deleting entry
 			for (var i = 0; i < _items._titles.length; i++) {
@@ -316,7 +288,8 @@ function delete_stored_data_and_reload(index) {
 		_items._extraLines = _items._extraLines - 1;
 
 		save_input_provided_and_reload(_items);
-	});
+	}
+	browser_getSettings(callback);
 }
 
 function on_close() {
@@ -327,14 +300,7 @@ function on_close() {
   * Inserts new HTML DIV to setup next shortcut link opener
   */
 function on_new_entry() {
-	chrome.storage.sync.get({
-		_title: EMPTY,
-		_url: EMPTY,
-		_extraLines: MIN_EXTRA_LINES,
-		_titles: [],
-		_urls: []
-	}, function(_items) {
-
+	var callback = function(_items) {
 		var lineCount = _items._extraLines;
 		// prepare table items for user input
 		_items._titles[lineCount] = EMPTY;
@@ -342,8 +308,9 @@ function on_new_entry() {
 		lineCount = _items._extraLines + 1;
 		_items._extraLines = lineCount;
 		
-		save_and_reload(_items);		
-	});
+		save_and_reload(_items);
+	}
+	browser_getSettings(callback);
 }
 
 /**

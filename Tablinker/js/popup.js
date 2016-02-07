@@ -1,5 +1,5 @@
 /**
-  * Tablinker Chrome Extension
+  * Tablinker WebExtension
   * Popup JS
   * @date 14/01/2016
   * @author Wojciech Plesiak 
@@ -20,7 +20,6 @@ var ID_NOT_CONF_DESC	= 'not_configured_description';
 var ID_BTN_CONFIGURE	= 'btn_configure';
 var ID_BTN_GO			= 'btn_go';
 
-var EMPTY               = '';
 var SPACE				= ' ';
 var ENTER_KEY_CODE		= '13';
 var PLACEHOLDER         = '%d';
@@ -36,7 +35,7 @@ var NEXT_LINE_HTML  = '<div class="frame"></div><input type="text" id="ticketNum
   */
 $(function() {
 	$(BUTTON_TOOLS).click(function() {
-		chrome.runtime.openOptionsPage();
+		browser_openOptionsPage();
 	});
 });
 
@@ -65,16 +64,12 @@ $(function() {
   */
 $(function() {
 	$(BUTTON_CONFIG).click(function() {
-		chrome.runtime.openOptionsPage();
+		browser_openOptionsPage();
 	});
 });
 
 function openTickets() {
-	chrome.storage.sync.get({
-		_url: '',
-		_urls: [],
-		_multientry: true
-	}, function(_items) {
+	var callback = function(_items) {
 		_items._urls.splice(0, 0, _items._url);
 		for (var i = 0; i < _items._urls.length; i++) {
 			var ticketNumber = $(ELEMENT_NUMBER + i).val();
@@ -88,12 +83,13 @@ function openTickets() {
 				}
 			}
 		}
-	});
+	}
+	browser_getSettings(callback);
 }
 
 function openTicket(baseurl, ticketNumber) {
 	var url = build_url(baseurl, ticketNumber);
-	chrome.tabs.create({url: url});
+	browser_openInNewTab(url);
 }
 
 function build_url(baseurl, ticketNumber) {
@@ -106,25 +102,21 @@ function build_url(baseurl, ticketNumber) {
 
 $(document).ready(function() {
 	localize_page();
-	chrome.storage.sync.get({
-		_title: EMPTY,
-		_url: EMPTY,
-		_titles: [],
-		_urls: []
-	}, function(_items) {
+	var callback = function(_items) {
 		var configured = is_configured(_items);
 		show_proper_div(configured);
 		if (configured) {
 			build_entries(_items);
 		}
-	});
+	}
+	browser_getSettings(callback);
 });
 
 function localize_page() {
-	document.getElementById(ID_NOT_CONF_TITLE).textContent = chrome.i18n.getMessage(ID_NOT_CONF_TITLE);
-	document.getElementById(ID_NOT_CONF_DESC).textContent = chrome.i18n.getMessage(ID_NOT_CONF_DESC);
-	document.getElementById(ID_BTN_CONFIGURE).value = chrome.i18n.getMessage(ID_BTN_CONFIGURE);
-	document.getElementById(ID_BTN_GO).value = chrome.i18n.getMessage(ID_BTN_GO);
+	document.getElementById(ID_NOT_CONF_TITLE).textContent = browser_getMessage(ID_NOT_CONF_TITLE);
+	document.getElementById(ID_NOT_CONF_DESC).textContent = browser_getMessage(ID_NOT_CONF_DESC);
+	document.getElementById(ID_BTN_CONFIGURE).value = browser_getMessage(ID_BTN_CONFIGURE);
+	document.getElementById(ID_BTN_GO).value = browser_getMessage(ID_BTN_GO);
 }
 
 function is_configured(_items) {

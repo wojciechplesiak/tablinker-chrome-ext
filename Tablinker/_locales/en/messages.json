@@ -3,7 +3,7 @@
 		"message" : "This extension allows to quickly open links in a new tab"
 	},
 	"options_description": {
-		"message" : "Provide titles and base urls for your shortcuts"
+		"message" : "Provide labels and base urls for your shortcuts"
 	},
 	"btn_save": {
 		"message" : "Save and close"
@@ -18,19 +18,19 @@
 		"message" : "Go"
 	},
 	"not_configured_title": {
-		"message" : "Tablinker not configured"
+		"message" : "Urly not configured"
 	},
 	"not_configured_description": {
 		"message" : "Press below button to go to options and set up base urls."
 	},
 	"title_placeholder": {
-		"message" : "Title (description)"
+		"message" : "Label (description)"
 	},
 	"base_url_placeholder": {
-		"message" : "eg. http://website.com/?id=   or   http://website.com/%/bla"
+		"message" : "eg. http://website.com/?id= or http://website.com/%/lorem"
 	},
 	"help_title": {
-		"message" : "Title"
+		"message" : "Label"
 	},
 	"help_title_explanation": {
 		"message" : "Title text to be displayed in popup as a label for text input field."
