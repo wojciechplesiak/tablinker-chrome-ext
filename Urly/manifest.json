@@ -3,7 +3,7 @@
 	"author": "plesiak.wojciech+urly@gmail.com",
 	"name": "Urly",
 	"description": "__MSG_extension_description__",
-	"homepage_url": "https://github.com/wojciechplesiak/tablinker-chrome-extension",
+	"homepage_url": "https://github.com/wojciechplesiak/urly-web-extension",
 	"version": "1.3",
 	"icons": {
 		"128": "assets/launcher_128.png",
